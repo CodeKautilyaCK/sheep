@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sheep Counter 🐑</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #0f172a, #1e293b);
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      text-align: center;
+      background: rgba(255,255,255,0.05);
+      padding: 40px;
+      border-radius: 20px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+    }
+
+    .sheep {
+      font-size: 3rem;
+      margin: 20px 0;
+      animation: jump 0.5s ease;
+    }
+
+    @keyframes jump {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+      100% { transform: translateY(0); }
+    }
+
+    button {
+      padding: 12px 25px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 10px;
+      background: #ef4444;
+      color: white;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #dc2626;
+      transform: scale(1.05);
+    }
+
+    .count {
+      font-size: 2rem;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>🐑 Sheep Counter</h1>
+    <div id="sheep" class="sheep">🐑</div>
+    <button onclick="countSheep()">Count Sheep</button>
+    <div id="count" class="count">0</div>
+  </div>
+
+  <script>
+    let count = 0;
+
+    function countSheep() {
+      count++;
+      document.getElementById("count").innerText = count;
+
+      const sheep = document.getElementById("sheep");
+      sheep.style.animation = "none";
+      void sheep.offsetWidth;
+      sheep.style.animation = "jump 0.5s ease";
+
+      if (count % 10 === 0) {
+        alert("You're getting sleepy... 😴");
+      }
+    }
+  </script>
+
+</body>
+</html>
