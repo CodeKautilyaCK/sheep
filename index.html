@@ -2,101 +2,116 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>For You ❤️</title>
+<title>A Dream I Didn't Want to Wake From</title>
+
 <style>
-    body {
-        margin: 0;
-        height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background: radial-gradient(circle at center, #1a0000, #000);
-        font-family: 'Segoe UI', sans-serif;
-        color: #fff;
-        overflow: hidden;
-    }
+body {
+    margin: 0;
+    height: 100vh;
+    background: linear-gradient(to bottom, #000000, #1a0000);
+    font-family: 'Georgia', serif;
+    color: #f5e6e6;
+    overflow: hidden;
+}
 
-    .container {
-        text-align: center;
-        max-width: 600px;
-        padding: 30px;
-        animation: fadeIn 2s ease-in-out;
-    }
+.scene {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at center, rgba(255,255,255,0.05), transparent 70%);
+}
 
-    h1 {
-        color: #ff4d6d;
-        margin-bottom: 20px;
-        animation: heartbeat 1.5s infinite;
-    }
+.shadow {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 200px;
+    height: 400px;
+    background: black;
+    opacity: 0.6;
+    filter: blur(20px);
+    transform: translateX(-50%);
+}
 
-    p {
-        font-size: 18px;
-        line-height: 1.6;
-        opacity: 0;
-        animation: appear 2s forwards;
-    }
+.text-box {
+    position: absolute;
+    width: 70%;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
 
-    .line1 { animation-delay: 1s; }
-    .line2 { animation-delay: 3s; }
-    .line3 { animation-delay: 5s; }
-    .line4 { animation-delay: 7s; }
-    .line5 { animation-delay: 9s; }
+.line {
+    opacity: 0;
+    margin: 20px 0;
+    font-size: 20px;
+    animation: fadeIn 2s forwards;
+}
 
-    @keyframes fadeIn {
-        from { opacity: 0; transform: scale(0.9); }
-        to { opacity: 1; transform: scale(1); }
-    }
+.line:nth-child(1) { animation-delay: 1s; }
+.line:nth-child(2) { animation-delay: 4s; }
+.line:nth-child(3) { animation-delay: 7s; }
+.line:nth-child(4) { animation-delay: 10s; }
+.line:nth-child(5) { animation-delay: 13s; }
 
-    @keyframes appear {
-        to { opacity: 1; }
-    }
+@keyframes fadeIn {
+    to { opacity: 1; }
+}
 
-    @keyframes heartbeat {
-        0%, 100% { transform: scale(1); }
-        50% { transform: scale(1.2); }
-    }
+.whisper {
+    font-style: italic;
+    color: #ff8080;
+    font-size: 22px;
+    letter-spacing: 1px;
+}
 
-    .heart {
-        position: fixed;
-        bottom: -10px;
-        color: #ff4d6d;
-        font-size: 20px;
-        animation: float 6s linear infinite;
-    }
-
-    @keyframes float {
-        0% { transform: translateY(0); opacity: 1; }
-        100% { transform: translateY(-100vh); opacity: 0; }
-    }
 </style>
 </head>
+
 <body>
 
-<div class="container">
-    <h1>❤️</h1>
+<div class="scene"></div>
+<div class="shadow"></div>
 
-    <p class="line1">You know what’s strange?</p>
-    <p class="line2">Out of everything I could’ve been doing… I ended up thinking about you.</p>
-    <p class="line3">Not loudly, not dramatically… just in those quiet moments.</p>
-    <p class="line4">Somewhere between your smile and the way you exist… you became my favorite part of the day.</p>
-    <p class="line5">I just… really like making you feel special. Because you are.</p>
+<div class="text-box">
+    <div class="line">Last night… I had a dream.</div>
+
+    <div class="line">Not the loud kind. Not the kind that fades fast.</div>
+
+    <div class="line">It was quiet… almost real.</div>
+
+    <div class="line">You were in a kitchen… making tea for yourself.</div>
+
+    <div class="line">And I was there… pretending I needed coffee.</div>
 </div>
 
 <script>
-    function createHeart() {
-        const heart = document.createElement("div");
-        heart.classList.add("heart");
-        heart.innerHTML = "❤️";
-        heart.style.left = Math.random() * 100 + "vw";
-        heart.style.animationDuration = (3 + Math.random() * 3) + "s";
-        document.body.appendChild(heart);
+const lines = [
+    "But the truth is…",
+    "I wasn’t there for the coffee.",
+    "I moved closer… slowly…",
+    "Until my arms found their way around your waist.",
+    "And for a second… everything felt still.",
+    "Like the world paused just to watch you exist.",
+    "<span class='whisper'>\"Who needs coffee… when you’re already here.\"</span>"
+];
 
-        setTimeout(() => {
-            heart.remove();
-        }, 6000);
-    }
+let index = 0;
 
-    setInterval(createHeart, 300);
+function showNextLine() {
+    if (index >= lines.length) return;
+
+    const div = document.createElement("div");
+    div.classList.add("line");
+    div.innerHTML = lines[index];
+    document.querySelector(".text-box").appendChild(div);
+
+    index++;
+    setTimeout(showNextLine, 3000);
+}
+
+setTimeout(showNextLine, 15000);
 </script>
 
 </body>
