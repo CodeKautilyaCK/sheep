@@ -2,154 +2,146 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>A Dream Scene</title>
+<title>For You</title>
 
 <style>
 body {
     margin: 0;
     height: 100vh;
-    background: radial-gradient(circle at center, #1a0000 20%, #000 80%);
+    background: radial-gradient(circle at top, #002b5c, #000814);
     overflow: hidden;
     font-family: 'Georgia', serif;
-    color: #ffe6cc;
+    color: #e6f2ff;
 }
 
-/* Lighting overlay */
-.light {
+/* Floating particles */
+.particle {
     position: absolute;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(circle at 60% 40%, rgba(255,180,0,0.25), transparent 60%),
-                radial-gradient(circle at 40% 60%, rgba(255,0,0,0.2), transparent 70%);
-}
-
-/* Scene container */
-.scene {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 70%;
-}
-
-/* SVG silhouettes */
-svg {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 100%;
-}
-
-/* Male movement */
-.male {
-    animation: moveCloser 6s forwards ease-in-out;
-}
-
-@keyframes moveCloser {
-    0% { transform: translateX(200px); }
-    100% { transform: translateX(40px); }
-}
-
-/* Arm wrap illusion */
-.arm {
-    opacity: 0;
-    animation: armWrap 2s forwards;
-    animation-delay: 6s;
-}
-
-@keyframes armWrap {
-    to { opacity: 1; }
-}
-
-/* Kiss moment glow */
-.kiss-glow {
-    position: absolute;
-    top: 40%;
-    left: 55%;
-    width: 200px;
-    height: 200px;
-    background: radial-gradient(circle, rgba(255,0,0,0.3), transparent 70%);
+    width: 3px;
+    height: 3px;
+    background: #99ccff;
     border-radius: 50%;
-    opacity: 0;
-    animation: kiss 3s forwards;
-    animation-delay: 9s;
+    opacity: 0.6;
+    animation: float linear infinite;
 }
 
-@keyframes kiss {
-    to {
-        opacity: 1;
-        transform: scale(1.2);
-    }
+@keyframes float {
+    from { transform: translateY(100vh); }
+    to { transform: translateY(-10vh); }
 }
 
-/* Text */
-.text-box {
+/* Ocean waves */
+.wave {
     position: absolute;
-    top: 10%;
-    left: 8%;
-    width: 40%;
+    bottom: 0;
+    width: 200%;
+    height: 180px;
+    background: rgba(0,120,255,0.15);
+    border-radius: 40%;
+    animation: waveMove 12s linear infinite;
 }
 
+@keyframes waveMove {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+}
+
+/* Main text box */
+.container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    width: 80%;
+    max-width: 600px;
+}
+
+/* Text lines */
 .line {
     opacity: 0;
+    font-size: 22px;
     margin: 15px 0;
-    font-size: 20px;
     animation: fadeIn 2s forwards;
 }
 
 .line:nth-child(1){animation-delay:1s;}
-.line:nth-child(2){animation-delay:3s;}
-.line:nth-child(3){animation-delay:5s;}
-.line:nth-child(4){animation-delay:7s;}
-
-.whisper {
-    color: #ff4d4d;
-    font-style: italic;
-    font-size: 22px;
-    opacity: 0;
-    animation: fadeIn 2s forwards;
-    animation-delay: 9s;
-}
+.line:nth-child(2){animation-delay:4s;}
+.line:nth-child(3){animation-delay:7s;}
+.line:nth-child(4){animation-delay:10s;}
+.line:nth-child(5){animation-delay:13s;}
+.line:nth-child(6){animation-delay:16s;}
 
 @keyframes fadeIn {
     to { opacity: 1; }
+}
+
+/* Final glow line */
+.final {
+    color: #66ccff;
+    font-style: italic;
+    font-size: 24px;
+}
+
+/* Button */
+button {
+    margin-top: 25px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    background: #3399ff;
+    color: white;
+    cursor: pointer;
+    opacity: 0;
+    animation: fadeIn 2s forwards;
+    animation-delay: 18s;
+}
+
+button:hover {
+    background: #66b3ff;
 }
 </style>
 </head>
 
 <body>
 
-<div class="light"></div>
+<!-- Waves -->
+<div class="wave"></div>
 
-<div class="text-box">
-    <div class="line">Last night… I had a dream.</div>
-    <div class="line">You were in the kitchen… making tea.</div>
-    <div class="line">And I was there… pretending I needed coffee.</div>
-    <div class="line">But the truth is… I only needed you closer.</div>
-    <div class="whisper">"Who needs coffee… when you're already here."</div>
+<!-- Particles -->
+<script>
+for (let i = 0; i < 50; i++) {
+    let p = document.createElement("div");
+    p.className = "particle";
+    p.style.left = Math.random() * 100 + "vw";
+    p.style.animationDuration = (6 + Math.random() * 6) + "s";
+    document.body.appendChild(p);
+}
+</script>
+
+<!-- Text -->
+<div class="container">
+    <div class="line">It’s quiet tonight…</div>
+    <div class="line">The kind of quiet that makes you think of someone.</div>
+    <div class="line">And somehow… it’s always you.</div>
+    <div class="line">I don’t even try anymore… you just show up in my mind.</div>
+    <div class="line">Not loudly… just there… like you belong.</div>
+    <div class="line final">Tell me… when do I get to hear your voice again?</div>
+
+    <button onclick="reveal()">Tap 💙</button>
 </div>
 
-<div class="scene">
-
-<svg viewBox="0 0 800 400">
-
-    <!-- Female silhouette -->
-    <ellipse cx="350" cy="300" rx="40" ry="100" fill="black"/>
-    <circle cx="350" cy="180" r="35" fill="black"/>
-
-    <!-- Male silhouette -->
-    <g class="male">
-        <ellipse cx="450" cy="300" rx="40" ry="100" fill="black"/>
-        <circle cx="450" cy="180" r="35" fill="black"/>
-
-        <!-- Arm -->
-        <rect class="arm" x="380" y="260" width="80" height="20" fill="black" rx="10"/>
-    </g>
-
-</svg>
-
-<div class="kiss-glow"></div>
-
-</div>
+<script>
+function reveal() {
+    const msg = document.createElement("div");
+    msg.style.marginTop = "20px";
+    msg.style.fontSize = "20px";
+    msg.style.opacity = "0";
+    msg.style.animation = "fadeIn 2s forwards";
+    msg.innerText = "I didn’t plan to care this much… but here I am.";
+    document.querySelector(".container").appendChild(msg);
+}
+</script>
 
 </body>
 </html>
